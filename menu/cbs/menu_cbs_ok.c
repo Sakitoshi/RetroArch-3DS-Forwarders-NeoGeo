@@ -1047,6 +1047,38 @@ static int action_ok_remap_file_save_game(const char *path,
    return generic_action_ok_remap_file_save(path, label, type,
          idx, entry_idx, ACTION_OK_REMAP_FILE_SAVE_GAME);
 }
+// Sakitoshi: new function to reset default control mappings
+static int action_ok_remap_file_reset_defaults(const char *path,
+      const char *label, unsigned type, size_t idx, size_t entry_idx)
+{
+   char directory[PATH_MAX_LENGTH];
+   char file[PATH_MAX_LENGTH];
+   char rmp[PATH_MAX_LENGTH];
+   global_t *global                = global_get_ptr();
+   settings_t *settings            = config_get_ptr();
+   rarch_system_info_t *info       = NULL;
+   const char *game_name           = NULL;
+   const char *core_name           = NULL;
+
+   input_remapping_set_defaults();
+
+   runloop_ctl(RUNLOOP_CTL_SYSTEM_INFO_GET, &info);
+   if (info)
+      core_name = info->info.library_name;
+   game_name = path_basename(global->name.base);
+   strcpy(directory, settings->input_remapping_directory);
+   fill_pathname_join(file, core_name, game_name, sizeof(file));
+   sprintf(rmp, "%s/%s.rmp", directory, file);
+
+   if (remove(rmp))
+      runloop_msg_queue_push("Remaps reverted to default",
+            1, 100, true);
+   else
+      runloop_msg_queue_push("Error removing remap file",
+            1, 100, true);
+
+   return 0;
+}
 
 int action_ok_path_use_directory(const char *path,
       const char *label, unsigned type, size_t idx, size_t entry_idx)
@@ -2397,6 +2429,9 @@ static int menu_cbs_init_bind_ok_compare_label(menu_file_list_cbs_t *cbs,
          break;
       case MENU_LABEL_REMAP_FILE_SAVE_GAME:
          BIND_ACTION_OK(cbs, action_ok_remap_file_save_game);
+         break;
+      case MENU_LABEL_REMAP_FILE_RESET_DEFAULTS:
+         BIND_ACTION_OK(cbs, action_ok_remap_file_reset_defaults);
          break;
       case MENU_LABEL_CONTENT_COLLECTION_LIST:
          BIND_ACTION_OK(cbs, action_ok_content_collection_list);

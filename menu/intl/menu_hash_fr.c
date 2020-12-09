@@ -94,7 +94,7 @@ const char *menu_hash_to_str_fr(uint32_t hash)
       case MENU_LABEL_VALUE_SYSTEM_BGM_ENABLE:
          return "Musique du système activée";
       case MENU_VALUE_RETROPAD:
-         return "RetroPad";
+         return "3DS";
       case MENU_VALUE_RETROKEYBOARD:
          return "RetroKeyboard";
       case MENU_LABEL_AUDIO_BLOCK_FRAMES:
@@ -395,6 +395,8 @@ const char *menu_hash_to_str_fr(uint32_t hash)
          return "Charger un fichier remaps de coeur";
       case MENU_LABEL_VALUE_REMAP_FILE_SAVE_GAME:
          return "Charger un fichier remap de contenu";
+      case MENU_LABEL_VALUE_REMAP_FILE_RESET_DEFAULTS:
+         return "Reset Defaults";
       case MENU_LABEL_VALUE_CHEAT_APPLY_CHANGES:
          return "Appliquer les changements";
       case MENU_LABEL_VALUE_SHADER_APPLY_CHANGES:

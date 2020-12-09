@@ -154,6 +154,9 @@ static void ctr_joypad_poll(void)
    pad_state |= (state_tmp & KEY_L) ? (UINT64_C(1) << RETRO_DEVICE_ID_JOYPAD_L) : 0;
    pad_state |= (state_tmp & KEY_ZR) ? (UINT64_C(1) << RETRO_DEVICE_ID_JOYPAD_R2) : 0;
    pad_state |= (state_tmp & KEY_ZL) ? (UINT64_C(1) << RETRO_DEVICE_ID_JOYPAD_L2) : 0;
+   // Sakitoshi: touchscreen acts as L3/R3
+   pad_state |= (state_tmp & KEY_TOUCH && (state_tmp_touch.py < 120 && (state_tmp_touch.px < 213))) ? (UINT64_C(1) << RETRO_DEVICE_ID_JOYPAD_L3) : 0;
+   pad_state |= (state_tmp & KEY_TOUCH && (state_tmp_touch.py < 120 && (state_tmp_touch.px > 107))) ? (UINT64_C(1) << RETRO_DEVICE_ID_JOYPAD_R3) : 0;
 
    analog_state[0][RETRO_DEVICE_INDEX_ANALOG_LEFT] [RETRO_DEVICE_ID_ANALOG_X]  =  ctr_joypad_fix_range(state_tmp_left_analog.dx);
    analog_state[0][RETRO_DEVICE_INDEX_ANALOG_LEFT] [RETRO_DEVICE_ID_ANALOG_Y]  = -ctr_joypad_fix_range(state_tmp_left_analog.dy);
@@ -162,8 +165,8 @@ static void ctr_joypad_poll(void)
 
    BIT64_CLEAR(lifecycle_state, RARCH_MENU_TOGGLE);
 
-   if((state_tmp & KEY_TOUCH) && (state_tmp_touch.py >= 0))          // Asdolo: Now touching everywhere on the screen enables the Menu
-      BIT64_SET(lifecycle_state, RARCH_MENU_TOGGLE);
+   if((state_tmp & KEY_TOUCH) && (state_tmp_touch.py > 120))          // Asdolo: Now touching everywhere on the screen enables the Menu
+      BIT64_SET(lifecycle_state, RARCH_MENU_TOGGLE);                  // Sakitoshi: reverted to half the screen to make space for L3/R3 buttons
 
    /* panic button */
    if((state_tmp & KEY_START) &&

@@ -2085,16 +2085,15 @@ static int menu_displaylist_parse_load_content_settings(
             MENU_SETTING_ACTION, 0, 0);
       */
 
-      //if (global->has_set.input_descriptors)
+      if (global->has_set.input_descriptors)
 
 
          // Asdolo: Removed 'Core Input Options' menu option from Quick Menu
-         /*
+         // Sakitoshi: Added back.
          menu_entries_push(info->list,
                menu_hash_to_str(MENU_LABEL_VALUE_CORE_INPUT_REMAPPING_OPTIONS),
                menu_hash_to_str(MENU_LABEL_CORE_INPUT_REMAPPING_OPTIONS),
                MENU_SETTING_ACTION, 0, 0);
-         */
 
       // Asdolo: Removed 'Cheats' menu option from Quick Menu
       /*
@@ -2395,6 +2394,7 @@ static int menu_displaylist_parse_options_cheats(
    return 0;
 }
 
+//Sakitoshi: Edit this function to list only the first player
 static int menu_displaylist_parse_options_remappings(
       menu_displaylist_info_t *info)
 {
@@ -2410,7 +2410,7 @@ static int menu_displaylist_parse_options_remappings(
 
    runloop_ctl(RUNLOOP_CTL_SYSTEM_INFO_GET, &system);
 
-   for (p = 0; p < settings->input.max_users; p++)
+   for (p = 0; p < 1; p++)
    {
       char key_type[PATH_MAX_LENGTH], key_analog[PATH_MAX_LENGTH];
       snprintf(key_type, sizeof(key_type),
@@ -2424,6 +2424,7 @@ static int menu_displaylist_parse_options_remappings(
             key_analog, PARSE_ONLY_UINT, true);
    }
 
+   /*
    menu_entries_push(info->list,
          menu_hash_to_str(MENU_LABEL_VALUE_REMAP_FILE_LOAD),
          menu_hash_to_str(MENU_LABEL_REMAP_FILE_LOAD),
@@ -2432,12 +2433,17 @@ static int menu_displaylist_parse_options_remappings(
          menu_hash_to_str(MENU_LABEL_VALUE_REMAP_FILE_SAVE_CORE),
          menu_hash_to_str(MENU_LABEL_REMAP_FILE_SAVE_CORE),
          MENU_SETTING_ACTION, 0, 0);
+   */
    menu_entries_push(info->list,
          menu_hash_to_str(MENU_LABEL_VALUE_REMAP_FILE_SAVE_GAME),
          menu_hash_to_str(MENU_LABEL_REMAP_FILE_SAVE_GAME),
          MENU_SETTING_ACTION, 0, 0);
-
-   for (p = 0; p < settings->input.max_users; p++)
+   // Sakitoshi: Add new option to reset remaps
+   menu_entries_push(info->list,
+         menu_hash_to_str(MENU_LABEL_VALUE_REMAP_FILE_RESET_DEFAULTS),
+         menu_hash_to_str(MENU_LABEL_REMAP_FILE_RESET_DEFAULTS),
+         MENU_SETTING_ACTION, 0, 0);
+   for (p = 0; p < 1; p++)
    {
       for (retro_id = 0; retro_id < RARCH_FIRST_CUSTOM_BIND + 4; retro_id++)
       {
@@ -2457,8 +2463,7 @@ static int menu_displaylist_parse_options_remappings(
             continue;
 
          snprintf(desc_label, sizeof(desc_label),
-               "%s %u %s : ", menu_hash_to_str(MENU_VALUE_USER),
-               user, description);
+               "NEOGEO %s : ", description); // Sakitoshi: simplify label
          menu_entries_push(info->list, desc_label, "",
                MENU_SETTINGS_INPUT_DESC_BEGIN +
                (p * (RARCH_FIRST_CUSTOM_BIND + 4)) +  retro_id, 0, 0);

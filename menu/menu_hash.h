@@ -949,8 +949,10 @@ extern "C" {
 #define MENU_LABEL_VALUE_VIDEO_SHADER_PRESET_SAVE_AS                           0x405d77b2U
 #define MENU_LABEL_VALUE_REMAP_FILE_SAVE_CORE                                  0xd9891572U
 #define MENU_LABEL_VALUE_REMAP_FILE_SAVE_GAME                                  0x9c487623U
+#define MENU_LABEL_VALUE_REMAP_FILE_RESET_DEFAULTS                             0x6bf787a0U
 #define MENU_LABEL_REMAP_FILE_SAVE_CORE                                        0x7c9d4c8fU
 #define MENU_LABEL_REMAP_FILE_SAVE_GAME                                        0x7c9f41e0U
+#define MENU_LABEL_REMAP_FILE_RESET_DEFAULTS                                   0x6895af12U
 #define MENU_LABEL_CONTENT_COLLECTION_LIST                                     0x32d1df83U
 #define MENU_LABEL_VALUE_CONTENT_COLLECTION_LIST                               0xdb177ea0U
 #define MENU_LABEL_VALUE_UNABLE_TO_READ_COMPRESSED_FILE                        0xbae7be3eU

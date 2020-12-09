@@ -136,7 +136,8 @@ bool input_remapping_save_file(const char *path)
          return false;
    }
 
-   for (i = 0; i < settings->input.max_users; i++)
+   // Sakitoshi: Save only the first player
+   for (i = 0; i < 1; i++)
    {
       char buf[64] = {0};
       char key_ident[RARCH_FIRST_CUSTOM_BIND + 4][128]   = {{0}};
@@ -169,7 +170,6 @@ bool input_remapping_save_file(const char *path)
                config_unset(conf,key_ident[j]);
          }
       }
-
 
       snprintf(buf, sizeof(buf), "input_libretro_device_p%u", i + 1);
       config_set_int(conf, buf, settings->input.libretro_device[i]);

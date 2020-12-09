@@ -452,6 +452,8 @@ static const char *menu_hash_to_str_us_label(uint32_t hash)
          return "remap_file_save_core";
       case MENU_LABEL_REMAP_FILE_SAVE_GAME:
          return "remap_file_save_game";
+      case MENU_LABEL_REMAP_FILE_RESET_DEFAULTS:
+         return "remap_file_reset_defaults";       // Sakitoshi: added new label "remap_file_reset_defaults"
       case MENU_LABEL_CHEAT_NUM_PASSES:
          return "cheat_num_passes";
       case MENU_LABEL_SHADER_APPLY_CHANGES:
@@ -885,7 +887,7 @@ const char *menu_hash_to_str_us(uint32_t hash)
       case MENU_LABEL_VALUE_SYSTEM_BGM_ENABLE:
          return "System BGM Enable";
       case MENU_VALUE_RETROPAD:
-         return "RetroPad";
+         return "3DS";                             // Sakitoshi: changed "RetroPad" to "3DS"
       case MENU_VALUE_RETROKEYBOARD:
          return "RetroKeyboard";
       case MENU_LABEL_VALUE_AUDIO_BLOCK_FRAMES:
@@ -1199,7 +1201,9 @@ const char *menu_hash_to_str_us(uint32_t hash)
       case MENU_LABEL_VALUE_REMAP_FILE_SAVE_CORE:
          return "Save Core Remap File";
       case MENU_LABEL_VALUE_REMAP_FILE_SAVE_GAME:
-         return "Save Game Remap File";
+         return "Save Remap";            // Sakitoshi: changed "Save Game Remap File" to "Save Remap"
+      case MENU_LABEL_VALUE_REMAP_FILE_RESET_DEFAULTS:
+         return "Reset Defaults";                  // Sakitoshi: added label "Reset Defaults"
       case MENU_LABEL_VALUE_CHEAT_APPLY_CHANGES:
          return "Apply Cheat Changes";
       case MENU_LABEL_VALUE_SHADER_APPLY_CHANGES:
@@ -1375,7 +1379,7 @@ const char *menu_hash_to_str_us(uint32_t hash)
       case MENU_LABEL_VALUE_BOXART:
          return "Display Boxart";
       case MENU_LABEL_VALUE_CORE_INPUT_REMAPPING_OPTIONS:
-         return "Core Input Options";
+         return "Controls";
       case MENU_LABEL_VALUE_SHADER_OPTIONS:
          return "Shader Options";
       case MENU_LABEL_VALUE_VIDEO_SHADER_PARAMETERS:
